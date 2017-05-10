@@ -79,7 +79,7 @@ class integrated_gradients:
         index = 0
         if verbose: print "Building gradient functions"
         for f in range(len(outchannels)):
-            gradients = model.optimizer.get_gradients(model.layers[-1].output.flatten()[outchannels[f]], model.inputs)
+            gradients = model.optimizer.get_gradients(K.flatten(model.layers[-1].output)[outchannels[f]], model.inputs)
             self.get_gradients[f] = K.function(inputs=self.input_tensors, outputs=gradients)
             
             if verbose:
